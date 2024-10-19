@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from "react";
 import "./styles/app.scss";
-import "./styles/userCards.scss";
 import { User } from "./utils/types";
 import useUsers from "./queries/users";
 import ListInputs from "./components/ListInputs";
-import UserCard from "./components/UserCard";
 import { sortByName } from "./utils/functions/userSorting";
+import UserList from "./components/UserList";
 
 function App() {
   const [users, setUsers] = useState<User[]>([]);
-  const userData = useUsers();
+  const { data: userData, isLoading } = useUsers();
 
   const [orderStyle, setOrderStyle] = useState<boolean>(true);
   const [filter, setFilter] = useState<string>("");
 
   useEffect(() => {
-    if (userData && userData.length > 0) {
+    if (userData) {
       const sorted = sortByName(userData, true);
       setUsers(sorted);
     }
@@ -49,7 +48,7 @@ function App() {
         Change ordering by name through the button and filter users by their
         data with the filter text field
       </p>
-      {userData && userData.length > 0 ? (
+      {!isLoading ? (
         <div>
           <ListInputs
             changeOrder={changeOrder}
@@ -58,11 +57,7 @@ function App() {
             setFilter={setFilter}
             filterUsers={filterUsers}
           />
-          <div className="user_cards_list">
-            {users.map((user) => (
-              <UserCard key={user.id} user={user} />
-            ))}
-          </div>
+          <UserList users={users} />
         </div>
       ) : (
         <div className="loading">

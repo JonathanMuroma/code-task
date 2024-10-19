@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import { User } from "../utils/types";
 
 const useUsers = () => {
-  const [data, setData] = useState<User[]>([]);
-  useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((response) => response.json())
-      // 4. Setting *dogImage* to the image url that we received from the response above
-      .then((data) => setData(data));
-  }, []);
+  async function fetchFunc() {
+    const personel = await fetch("https://jsonplaceholder.typicode.com/users");
+    const data = await personel.json();
 
-  return data;
+    return data;
+  }
+
+  const { data, isLoading, isRefetching, isFetching } = useQuery(
+    "randomFacts",
+    fetchFunc
+  );
+
+  return { data, isLoading, isRefetching, isFetching };
 };
 
 export default useUsers;
