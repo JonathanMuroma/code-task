@@ -1,24 +1,51 @@
 .list_inputs {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
+  gap: 40px;
+
+  @media screen and (max-width: 670px) {
+    flex-direction: column;
+    gap: 0px;
+  }
   .asc_desc_btn {
     margin-bottom: 20px;
     cursor: pointer;
-    border: 1px solid black;
+    border: 1px solid #093a3e;
     border-radius: 25px;
     display: inline-block;
     max-width: 280px;
     width: 100%;
+
     p {
       text-align: center;
       padding: 0 15px;
     }
   }
+  .asc_desc_btn:hover {
+    background-color: #093a3e;
+    color: #64e9ee;
+    transition: all 0.2s;
+  }
   .filter_input {
     margin-bottom: 20px;
+    display: flex;
+    max-width: 300px;
+    width: 100%;
+    align-items: center;
+    gap: 10px;
     label {
       font-weight: bold;
+      display: block;
+      white-space: nowrap;
+    }
+    input {
+      display: block;
+      line-height: 30px;
+      font-size: 15px;
+      width: 100%;
+      max-width: 450px;
     }
   }
 }
