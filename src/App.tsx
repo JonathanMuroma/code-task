@@ -8,10 +8,10 @@ import UserList from "./components/UserList";
 
 function App() {
   const [users, setUsers] = useState<User[]>([]);
-  const { data: userData, isLoading } = useUsers();
-
   const [orderStyle, setOrderStyle] = useState<boolean>(true);
   const [filter, setFilter] = useState<string>("");
+
+  const { data: userData, isLoading } = useUsers();
 
   useEffect(() => {
     if (userData) {
