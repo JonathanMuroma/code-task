@@ -1,6 +1,6 @@
 import React from "react";
 import { User } from "../utils/types";
-
+import "../styles/userCard.scss";
 interface UserCard {
   user: User;
 }

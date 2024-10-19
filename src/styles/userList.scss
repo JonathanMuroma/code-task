@@ -1,0 +1,7 @@
+.user_cards_list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 300px);
+  gap: 20px;
+  width: 100%;
+  justify-content: center;
+}
