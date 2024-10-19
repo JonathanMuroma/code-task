@@ -5,6 +5,7 @@ import { User } from "./utils/types";
 import useUsers from "./queries/users";
 import ListInputs from "./components/ListInputs";
 import UserCard from "./components/UserCard";
+import { sortByName } from "./utils/functions/userSorting";
 
 function App() {
   const [users, setUsers] = useState<User[]>([]);
@@ -12,14 +13,6 @@ function App() {
 
   const [orderStyle, setOrderStyle] = useState<boolean>(true);
   const [filter, setFilter] = useState<string>("");
-
-  const sortByName = (userList: User[], ascOrder: boolean) => {
-    return userList.sort(function (a, b) {
-      if (a.name.toLowerCase() < b.name.toLowerCase()) return ascOrder ? -1 : 1;
-      if (a.name.toLowerCase() > b.name.toLowerCase()) return ascOrder ? 1 : -1;
-      return 0;
-    });
-  };
 
   useEffect(() => {
     if (userData && userData.length > 0) {
